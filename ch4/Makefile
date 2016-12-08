@@ -3,6 +3,9 @@
 VERILOG_SRC=./src
 OUTPUT_PATH=./outputs
 
+IVERILOG_FLAGS=-g 2012
+IVERILOG=iverilog $(IVERILOG_FLAGS)
+
 
 SILLYFUNCTION_SRC = $(shell ls $(VERILOG_SRC)/sillyfunction*.v)  
 INV_4BITS_SRC= $(shell ls $(VERILOG_SRC)/inv_4bit*.v)  
@@ -14,49 +17,53 @@ FULLADDER_SRC= $(shell ls $(VERILOG_SRC)/fulladder*.v)
 NUMBERS_SRC= $(shell ls $(VERILOG_SRC)/numbers*.v)  
 TRISTATE_SRC= $(shell ls $(VERILOG_SRC)/tristate*.v)  
 BITSWIZZLE_SRC= $(shell ls $(VERILOG_SRC)/bitswizzle*.v)  
+SEVENSEG_SRC= $(shell ls $(VERILOG_SRC)/sevenseg*.v)  
 
 
 
 test_sillyfunction:
-	iverilog $(SILLYFUNCTION_SRC) -o $(OUTPUT_PATH)/sillyfunction
+	$(IVERILOG) -o $(OUTPUT_PATH)/sillyfunction $(SILLYFUNCTION_SRC) 
 	vvp $(OUTPUT_PATH)/sillyfunction -vcd
 
 test_inv_4bit:
-	iverilog $(INV_4BITS_SRC) -o $(OUTPUT_PATH)/invert_4bit
+	$(IVERILOG) -o $(OUTPUT_PATH)/invert_4bit $(INV_4BITS_SRC) 
 	vvp $(OUTPUT_PATH)/invert_4bit -vcd
 
 test_gates:
-	iverilog $(GATES_SRC) -o $(OUTPUT_PATH)/gates
+	$(IVERILOG) -o $(OUTPUT_PATH)/gates $(GATES_SRC) 
 	vvp $(OUTPUT_PATH)/gates -vcd
 
 test_and8:
-	iverilog $(AND8_SRC) -o $(OUTPUT_PATH)/and8
+	$(IVERILOG) -o $(OUTPUT_PATH)/and8 $(AND8_SRC)
 	vvp $(OUTPUT_PATH)/and8 -vcd
 
 test_mux2:
-	iverilog $(MUX2_SRC) -o $(OUTPUT_PATH)/mux2
+	$(IVERILOG) -o $(OUTPUT_PATH)/mux2 $(MUX2_SRC)
 	vvp $(OUTPUT_PATH)/mux2 -vcd
 
 test_mux4:
-	iverilog $(MUX4_SRC) -o $(OUTPUT_PATH)/mux4
+	$(IVERILOG) -o $(OUTPUT_PATH)/mux4 $(MUX4_SRC)
 	vvp $(OUTPUT_PATH)/mux4 -vcd
 
 test_fulladder:
-	iverilog $(FULLADDER_SRC) -o $(OUTPUT_PATH)/fulladder
+	$(IVERILOG) -o $(OUTPUT_PATH)/fulladder -g2012 $(FULLADDER_SRC)
 	vvp $(OUTPUT_PATH)/fulladder -vcd
 
 test_numbers:
-	iverilog $(NUMBERS_SRC) -o $(OUTPUT_PATH)/numbers
+	$(IVERILOG) -o $(OUTPUT_PATH)/numbers $(NUMBERS_SRC)
 	vvp $(OUTPUT_PATH)/numbers -vcd
 
 test_tristate:
-	iverilog $(TRISTATE_SRC) -o $(OUTPUT_PATH)/tristate
+	$(IVERILOG) -o $(OUTPUT_PATH)/tristate $(TRISTATE_SRC)
 	vvp $(OUTPUT_PATH)/tristate -vcd
 
 test_bitswizzle:
-	iverilog $(BITSWIZZLE_SRC) -o $(OUTPUT_PATH)/bitswizzle
+	$(IVERILOG) -o $(OUTPUT_PATH)/bitswizzle $(BITSWIZZLE_SRC)
 	vvp $(OUTPUT_PATH)/bitswizzle -vcd
 
+test_sevenseg:
+	$(IVERILOG) -o $(OUTPUT_PATH)/sevenseg $(SEVENSEG_SRC)
+	vvp $(OUTPUT_PATH)/sevenseg -vcd
 
 
 wave:
