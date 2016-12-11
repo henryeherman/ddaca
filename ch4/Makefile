@@ -18,6 +18,7 @@ NUMBERS_SRC= $(shell ls $(VERILOG_SRC)/numbers*.v)
 TRISTATE_SRC= $(shell ls $(VERILOG_SRC)/tristate*.v)  
 BITSWIZZLE_SRC= $(shell ls $(VERILOG_SRC)/bitswizzle*.v)  
 SEVENSEG_SRC= $(shell ls $(VERILOG_SRC)/sevenseg*.v)  
+TIMESCALE_EX= $(shell ls $(VERILOG_SRC)/timescale_example*.v)  
 
 
 
@@ -64,6 +65,10 @@ test_bitswizzle:
 test_sevenseg:
 	$(IVERILOG) -o $(OUTPUT_PATH)/sevenseg $(SEVENSEG_SRC)
 	vvp $(OUTPUT_PATH)/sevenseg -vcd
+
+test_timescale_ex:
+	$(IVERILOG) -o $(OUTPUT_PATH)/timescale_ex $(TIMESCALE_EX)
+	vvp $(OUTPUT_PATH)/timescale_ex -vcd
 
 
 wave:
