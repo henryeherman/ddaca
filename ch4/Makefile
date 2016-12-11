@@ -19,6 +19,7 @@ TRISTATE_SRC= $(shell ls $(VERILOG_SRC)/tristate*.v)
 BITSWIZZLE_SRC= $(shell ls $(VERILOG_SRC)/bitswizzle*.v)  
 SEVENSEG_SRC= $(shell ls $(VERILOG_SRC)/sevenseg*.v)  
 TIMESCALE_EX= $(shell ls $(VERILOG_SRC)/timescale_example*.v)  
+PRIORITYCKT_SRC= $(shell ls $(VERILOG_SRC)/priorityckt*.v)  
 
 
 
@@ -70,6 +71,9 @@ test_timescale_ex:
 	$(IVERILOG) -o $(OUTPUT_PATH)/timescale_ex $(TIMESCALE_EX)
 	vvp $(OUTPUT_PATH)/timescale_ex -vcd
 
+test_priorityckt:
+	$(IVERILOG) -o $(OUTPUT_PATH)/priorityckt $(PRIORITYCKT_SRC)
+	vvp $(OUTPUT_PATH)/priorityckt -vcd
 
 wave:
 	 gtkwave $(OUTPUT_PATH)/simple.vcd
