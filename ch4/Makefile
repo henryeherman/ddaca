@@ -20,6 +20,7 @@ BITSWIZZLE_SRC= $(shell ls $(VERILOG_SRC)/bitswizzle*.v)
 SEVENSEG_SRC= $(shell ls $(VERILOG_SRC)/sevenseg*.v)  
 TIMESCALE_EX= $(shell ls $(VERILOG_SRC)/timescale_example*.v)  
 PRIORITYCKT_SRC= $(shell ls $(VERILOG_SRC)/priorityckt*.v)  
+STRUCTURALMUX4_SRC= $(shell ls $(VERILOG_SRC)/structuralmux4*.v) $(VERILOG_SRC)/mux2.v 
 
 
 
@@ -74,6 +75,10 @@ test_timescale_ex:
 test_priorityckt:
 	$(IVERILOG) -o $(OUTPUT_PATH)/priorityckt $(PRIORITYCKT_SRC)
 	vvp $(OUTPUT_PATH)/priorityckt -vcd
+
+test_structuralmux4:
+	$(IVERILOG) -o $(OUTPUT_PATH)/structuralmux4 $(STRUCTURALMUX4_SRC)
+	vvp $(OUTPUT_PATH)/structuralmux4 -vcd
 
 wave:
 	 gtkwave $(OUTPUT_PATH)/simple.vcd
