@@ -25,12 +25,21 @@ test_sillyfunction2: clean
 
 
 test_inv_4bit: clean
-	verilator -Wall -CFLAGS -std=c++0x -cc ../ch4/src/invert_4bit.v --exe inv_4bit_tb.cc
+	verilator -CFLAGS -std=c++0x -cc ../ch4/src/inv_4bit.v --top-module invert_4bit --exe inv_4bit_tb.cc 
 	cd obj_dir; make -j -f Vinvert_4bit.mk Vinvert_4bit
 	@echo "*****************************************"
 	@echo "Running simulation"
 	@echo "*****************************************"
 	@obj_dir/Vinvert_4bit
+
+
+test_gates: clean
+	verilator -Wall -CFLAGS -std=c++0x -cc ../ch4/src/gates.v --exe gates_tb.cc
+	cd obj_dir; make -j -f Vgates.mk Vgates
+	@echo "*****************************************"
+	@echo "Running simulation"
+	@echo "*****************************************"
+	@obj_dir/Vgates
 
 
 clean:
