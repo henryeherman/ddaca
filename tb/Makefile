@@ -41,6 +41,15 @@ test_gates: clean
 	@echo "*****************************************"
 	@obj_dir/Vgates
 
+test_and8: clean
+	verilator -Wall --trace -CFLAGS -std=c++0x -cc ../ch4/src/and8.v --exe and8_tb.cc
+	cd obj_dir; make -j -f Vand8.mk Vand8
+	@echo "*****************************************"
+	@echo "Running simulation"
+	@echo "*****************************************"
+	@obj_dir/Vand8
+	@gtkwave obj_dir/simx.vcd
+
 
 clean:
 	rm -Rf obj_dir
